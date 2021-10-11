@@ -21,7 +21,7 @@ namespace Algorithms_Class_3
 
         public struct GetDistance
         {
-                public static double xDistance (double x1, double y1, double x2, double y2)
+                public static double Distance (double x1, double y1, double x2, double y2)
             {
                 double dis = Math.Sqrt((x1 - x2)*(x1-x2) + ((y1 - y2) * (y1 - y2)));
                 return dis;
@@ -32,7 +32,7 @@ namespace Algorithms_Class_3
             Point A = new Point(1, 4);
             Point B = new Point(5, 10);
 
-            double result = GetDistance.xDistance(A.X, A.Y, B.X, B.Y);
+            double result = GetDistance.Distance(A.X, A.Y, B.X, B.Y);
             Console.WriteLine(result);
         }
     }
