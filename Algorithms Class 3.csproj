@@ -6,4 +6,8 @@
     <RootNamespace>Algorithms_Class_3</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+  </ItemGroup>
+
 </Project>

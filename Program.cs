@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
 
 namespace Algorithms_Class_3
 {
     class Program
     {
 
-        public class Point
+        
+        public class PointC
         {
             private double x, y;
-            public Point (double x, double y)
+            public PointC (double x, double y)
             {
                 this.x = x;
                 this.y = y;
@@ -19,21 +23,99 @@ namespace Algorithms_Class_3
 
         }
 
-        public struct GetDistance
+        public struct PointS
         {
-                public static double Distance (double x1, double y1, double x2, double y2)
+            private double x, y;
+
+            //
+            public PointS(double x, double y)
             {
-                double dis = Math.Sqrt((x1 - x2)*(x1-x2) + ((y1 - y2) * (y1 - y2)));
+                this.x = x;
+                this.y = y;
+            }
+
+            public double X { get { return x; } private set { x = value; } }
+            public double Y { get { return y; } private set { y = value; } }
+
+        }
+        public class GetDistanceC
+        {
+            public static double Distance(PointC A, PointC B)
+            {
+                double dis = Math.Sqrt(Math.Pow((A.X - B.X), 2) + Math.Pow((A.Y - B.Y), 2));
+                return dis;
+            }
+        }
+
+        public struct GetDistanceS
+        {
+            public static double Distance(PointS A, PointS B)
+            {
+                double dis = Math.Sqrt(Math.Pow((A.X - B.X), 2) + Math.Pow((A.Y - B.Y), 2));
+                return dis;
+            }
+        }
+
+        
+
+        public struct PointSFloat
+        {
+            private float x, y;
+
+            //
+            public PointSFloat(float x, float y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public float X { get { return x; } private set { x = value; } }
+            public float Y { get { return y; } private set { y = value; } }
+
+        }
+
+        public struct GetDistanceSFloat
+        {
+            public static float Distance(PointSFloat A, PointSFloat B)
+            {
+                float dis = (float)(Math.Pow((A.X - B.X), 2) + Math.Pow((A.Y - B.Y), 2));
                 return dis;
             }
         }
         static void Main(string[] args)
         {
-            Point A = new Point(1, 4);
-            Point B = new Point(5, 10);
+            Stopwatch watchClass = new Stopwatch(); //Class with double value
+            watchClass.Start();
+            PointC AC = new PointC(1, 4);
+            PointC BC = new PointC(5, 10);
 
-            double result = GetDistance.Distance(A.X, A.Y, B.X, B.Y);
-            Console.WriteLine(result);
+            double resultC = GetDistanceC.Distance(AC, BC);
+            watchClass.Stop();
+            Console.WriteLine(resultC);
+            Console.WriteLine(watchClass.Elapsed);
+
+            Stopwatch watchStruct = new Stopwatch(); //Struct with double value
+            watchStruct.Start();
+            PointS AS = new PointS(1, 4);
+            PointS BS = new PointS(5, 10);
+
+            double resultS = GetDistanceS.Distance(AS, BS);
+            watchStruct.Stop();
+            Console.WriteLine(resultS);
+            Console.WriteLine(watchStruct.Elapsed);
+
+            Stopwatch watchStructFloat = new Stopwatch(); //Struct with float value
+            watchStructFloat.Start();
+            PointSFloat ASFloat = new PointSFloat(1, 4);
+            PointSFloat BSFloat = new PointSFloat(5, 10);
+
+            float resultSFloat = GetDistanceSFloat.Distance(ASFloat, BSFloat);
+            watchStructFloat.Stop();
+            Console.WriteLine(resultSFloat);
+            Console.WriteLine(watchStructFloat.Elapsed);
+
+            Console.WriteLine("Conclusion: Struct with Double values is the fastest.");
+
         }
     }
 }
