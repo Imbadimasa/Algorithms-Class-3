@@ -7,8 +7,8 @@ namespace Algorithms_Class_3
 {
     class Program
     {
-
-        
+        //Class with Double
+        #region 
         public class PointC
         {
             private double x, y;
@@ -23,6 +23,20 @@ namespace Algorithms_Class_3
 
         }
 
+        public class GetDistanceC
+        {
+            public static double Distance(PointC A, PointC B)
+            {
+                double dis = Math.Sqrt(Math.Pow((A.X - B.X), 2) + Math.Pow((A.Y - B.Y), 2));
+                return dis;
+            }
+        }
+
+        #endregion //
+
+
+        //Struct with Double
+        #region
         public struct PointS
         {
             private double x, y;
@@ -38,14 +52,6 @@ namespace Algorithms_Class_3
             public double Y { get { return y; } private set { y = value; } }
 
         }
-        public class GetDistanceC
-        {
-            public static double Distance(PointC A, PointC B)
-            {
-                double dis = Math.Sqrt(Math.Pow((A.X - B.X), 2) + Math.Pow((A.Y - B.Y), 2));
-                return dis;
-            }
-        }
 
         public struct GetDistanceS
         {
@@ -55,9 +61,11 @@ namespace Algorithms_Class_3
                 return dis;
             }
         }
+        #endregion
 
-        
 
+        //Struct with Float
+        #region
         public struct PointSFloat
         {
             private float x, y;
@@ -82,6 +90,10 @@ namespace Algorithms_Class_3
                 return dis;
             }
         }
+
+        #endregion
+
+
         static void Main(string[] args)
         {
             Stopwatch watchClass = new Stopwatch(); //Class with double value
